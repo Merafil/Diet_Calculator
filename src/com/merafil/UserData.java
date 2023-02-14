@@ -78,6 +78,7 @@ public class UserData {
 
     public void printUserData() {
         String sex = null;
+        gender = Character.toLowerCase(gender);
         if(gender =='m')    {
             sex = "male";
         }
