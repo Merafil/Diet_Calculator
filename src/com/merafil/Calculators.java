@@ -95,7 +95,7 @@ public class Calculators {
     public void printAll(UserData me)  {
 
         System.out.println("*** PERSONAL DATA ***");
-        me.printUserData();
+        me.printUserData(data.getGender());
         System.out.println("*** RESULT BMI ***");
         calculateBMI() ;
         System.out.println("*** RESULTS IDEAL BODY WEIGHT ***");

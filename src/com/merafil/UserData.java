@@ -3,11 +3,11 @@ package com.merafil;
 public class UserData {
 
     private char gender;
-    private String lastName ;
-    private String firstName ;
-    private int age ;
-    private double height ;
-    private double weight ;
+    private String lastName;
+    private String firstName;
+    private int age;
+    private double height;
+    private double weight;
     private double activity;
 
     public UserData(char gender, String lastName, String firstName, int age, double height, double weight, double activity) {
@@ -76,30 +76,37 @@ public class UserData {
         this.activity = activity;
     }
 
-//    public void printUserData() {
-//        String sex = null;
-//        gender = Character.toLowerCase(gender);
-//        if(gender =='m')    {
-//            sex = "male";
+//        public void printUserData(char gender) {
+//            String sex;
+//            gender = Character.toLowerCase(gender);
+//            if (gender == 'm') {
+//                sex = "male";
+//            } else if (gender == 'f') {
+//                sex = "female";
+//            } else {
+//                throw new IllegalArgumentException("wrong gender");
+//            }
+//            System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName +  ", firstName=" + firstName  + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
 //        }
-//        else    {
-//            sex = "female";
-//        }
-//        System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName +  ", firstName=" + firstName  + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
-//    }
 
-        public void printUserData() {
-            String sex;
-            gender = Character.toLowerCase(gender);
+    public void printUserData(char gender) {
+        String sex = null;
+        gender = Character.toLowerCase(gender);
+        try {
             if (gender == 'm') {
                 sex = "male";
             } else if (gender == 'f') {
                 sex = "female";
             } else {
-                throw new IllegalArgumentException("wrong gender");
+                throw new IllegalArgumentException();
             }
-            System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName +  ", firstName=" + firstName  + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
+            System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Use 'm/M' for male or 'f/F' for female when specifying gender");
+            throw e;
         }
+}
+
 
 //    not used
     public String toString() {
