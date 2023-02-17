@@ -76,21 +76,34 @@ public class UserData {
         this.activity = activity;
     }
 
-    public void printUserData() {
-        String sex = null;
-        gender = Character.toLowerCase(gender);
-        if(gender =='m')    {
-            sex = "male";
+//    public void printUserData() {
+//        String sex = null;
+//        gender = Character.toLowerCase(gender);
+//        if(gender =='m')    {
+//            sex = "male";
+//        }
+//        else    {
+//            sex = "female";
+//        }
+//        System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName +  ", firstName=" + firstName  + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
+//    }
+
+        public void printUserData() {
+            String sex;
+            gender = Character.toLowerCase(gender);
+            if (gender == 'm') {
+                sex = "male";
+            } else if (gender == 'f') {
+                sex = "female";
+            } else {
+                throw new IllegalArgumentException("wrong gender");
+            }
+            System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName +  ", firstName=" + firstName  + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
         }
-        else    {
-            sex = "female";
-        }
-        System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName +  ", firstName=" + firstName  + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
-    }
 
 //    not used
     public String toString() {
-        String sex = null;
+        String sex;
         if(gender =='m')    {
              sex = "male";
         }

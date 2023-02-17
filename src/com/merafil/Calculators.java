@@ -80,16 +80,16 @@ public class Calculators {
 
     }
 
-    // CALKOWITE PRZEMIANA MATERII
+    // CALKOWITA PRZEMIANA MATERII
     public void calculateCPM(double activity)  {
+        BigDecimal bdM;
         if(data.getGender()=='m') {
-            BigDecimal bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity)).setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Euqation Mifflin : " + bdM.floatValue() + " kcal - based on activity of " + activity);
+            bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity)).setScale(2, RoundingMode.HALF_UP);
         }
         else    {
-            BigDecimal bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) - 161) * activity)).setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Euqation Mifflin : " + bdM.floatValue() + " kcal - based on activity of " + activity);
+            bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) - 161) * activity)).setScale(2, RoundingMode.HALF_UP);
         }
+        System.out.println("Euqation Mifflin : " + bdM.floatValue() + " kcal - based on activity of " + activity);
     }
 
     public void printAll(UserData me)  {
