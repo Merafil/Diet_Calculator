@@ -104,16 +104,16 @@ public class Calculators {
     }
 
     // first new BigDecimal is procentage of total calories, second one is amount of kcal per gram
-    public void calculateMacro(BigDecimal standardMetabolic){
-        BigDecimal carbs = standardMetabolic.multiply(new BigDecimal(0.4)).divide(new BigDecimal(4)).setScale(0,RoundingMode.HALF_UP);
-        BigDecimal proteins = standardMetabolic.multiply(new BigDecimal(0.3)).divide(new BigDecimal(4)).setScale(0,RoundingMode.HALF_UP);
-        BigDecimal fats = standardMetabolic.multiply(new BigDecimal(0.3)).divide(new BigDecimal(9)).setScale(0,RoundingMode.HALF_UP);
+    public void calculateMacro(){
+        BigDecimal carbs = SMRValue().multiply(new BigDecimal(0.4)).divide(new BigDecimal(4)).setScale(0,RoundingMode.HALF_UP);
+        BigDecimal proteins = SMRValue().multiply(new BigDecimal(0.3)).divide(new BigDecimal(4)).setScale(0,RoundingMode.HALF_UP);
+        BigDecimal fats = SMRValue().multiply(new BigDecimal(0.3)).divide(new BigDecimal(9)).setScale(0,RoundingMode.HALF_UP);
         System.out.println("Based on macro ratio of 40% carbs, 30% protein and 30% fats");
         System.out.println("CARBS: " + carbs.intValue() + "g || " + "PROTEINS: " + proteins.intValue() + "g || " + "FATS: " + fats.intValue() + "g" );
     }
 
-    public void calculateReduction(BigDecimal standardMetabolic) {
-        float reduction = standardMetabolic.floatValue();
+    public void calculateReduction() {
+        float reduction = SMRValue().floatValue();
         System.out.println("You need " + (reduction-250) + "kcal to lose 0.25 kg per week");
         System.out.println("You need " + (reduction-500) + "kcal to lose 0.5 kg per week");
         System.out.println("You need " + (reduction-1000) + "kcal to lose 1 kg per week");
@@ -122,11 +122,11 @@ public class Calculators {
     public void printAll(UserData me)  {
 
         System.out.println("*** PERSONAL DATA ***");
-        me.printUserData(data.getGender());
+        me.printUserData();
         System.out.println("*** RESULT BMI ***");
-        calculateBMI() ;
+        calculateBMI();
         System.out.println("*** RESULTS IDEAL BODY WEIGHT ***");
-        calculateIBW() ;
+        calculateIBW();
         System.out.println("*** RESULT LEAN BODY MASS ***");
         System.out.println(calculateLBM());
         System.out.println("*** RESULTS BASAL METABOLIC RATE ***");
@@ -134,9 +134,9 @@ public class Calculators {
         System.out.println("*** RESULTS STANDARD METABOLIC RATE ***");
         calculateSMR();
         System.out.println("*** RESULTS FOR MACRONUTRIENTS ***");
-        calculateMacro(SMRValue());
+        calculateMacro();
         System.out.println("*** RESULTS FOR REDUCTION ***");
-        calculateReduction(SMRValue());
+        calculateReduction();
 
     }
 

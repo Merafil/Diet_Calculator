@@ -1,7 +1,6 @@
 package com.merafil;
 
 public class UserData {
-
     private char gender;
     private String lastName;
     private String firstName;
@@ -76,22 +75,9 @@ public class UserData {
         this.activity = activity;
     }
 
-//        public void printUserData(char gender) {
-//            String sex;
-//            gender = Character.toLowerCase(gender);
-//            if (gender == 'm') {
-//                sex = "male";
-//            } else if (gender == 'f') {
-//                sex = "female";
-//            } else {
-//                throw new IllegalArgumentException("wrong gender");
-//            }
-//            System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName +  ", firstName=" + firstName  + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
-//        }
-
-    public void printUserData(char gender) {
+    public void printUserData() {
         String sex = null;
-        gender = Character.toLowerCase(gender);
+        gender = Character.toLowerCase(getGender());
         try {
             if (gender == 'm') {
                 sex = "male";
