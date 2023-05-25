@@ -93,17 +93,20 @@ public class Calculators {
     }
 
     public void calculateReduction(double activity) {
-        BigDecimal lowReduction,highReduction ;
+        BigDecimal bdM;
         if(data.getGender()=='m') {
-            lowReduction = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity - 250)).setScale(2, RoundingMode.HALF_UP);
-            highReduction = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity - 500)).setScale(2, RoundingMode.HALF_UP);
+            bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity)).setScale(2, RoundingMode.HALF_UP);
         }
         else    {
-            lowReduction = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) - 161) * activity - 500)).setScale(2, RoundingMode.HALF_UP);
-            highReduction = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity - 250)).setScale(2, RoundingMode.HALF_UP);
+            bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) - 161) * activity)).setScale(2, RoundingMode.HALF_UP);
         }
+        BigDecimal lowReduction = bdM.subtract(new BigDecimal(250));
+        BigDecimal mediumReduction = bdM.subtract(new BigDecimal(500));
+        BigDecimal highReduction = bdM.subtract(new BigDecimal(1000));
         System.out.println("You need " + lowReduction.floatValue() + " kcal to lose 0.25 kg per week");
-        System.out.println("You need " + highReduction.floatValue() + " kcal to lose 0.5 kg per week");
+        System.out.println("You need " + mediumReduction.floatValue() + " kcal to lose 0.5 kg per week");
+        System.out.println("You need " + highReduction.floatValue() + " kcal to lose 1 kg per week");
+
     }
 
     public void printAll(UserData me)  {
