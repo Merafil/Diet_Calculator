@@ -86,7 +86,7 @@ public class UserData {
             } else {
                 throw new IllegalArgumentException();
             }
-            System.out.println("UserData : " + "gender=" + sex + ", lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
+            System.out.println("UserData: " + "gender=" + sex + ", lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + ", height=" + height + ", weight=" + weight + ", activity=" + activity);
         } catch (IllegalArgumentException e) {
             System.out.println("Use 'm/M' for male or 'f/F' for female when specifying gender");
             throw e;

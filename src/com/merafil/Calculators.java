@@ -103,13 +103,13 @@ public class Calculators {
         return bdM;
     }
 
-    // first new BigDecimal is procentage of total calories, second one is amount of kcal per gram
+    // first new BigDecimal is percentage of total calories, second one is amount of kcal per gram
     public void calculateMacro(){
-        BigDecimal carbs = SMRValue().multiply(new BigDecimal(0.4)).divide(new BigDecimal(4)).setScale(0,RoundingMode.HALF_UP);
-        BigDecimal proteins = SMRValue().multiply(new BigDecimal(0.3)).divide(new BigDecimal(4)).setScale(0,RoundingMode.HALF_UP);
-        BigDecimal fats = SMRValue().multiply(new BigDecimal(0.3)).divide(new BigDecimal(9)).setScale(0,RoundingMode.HALF_UP);
+        BigDecimal carbs = SMRValue().multiply(new BigDecimal(0.4)).divide(new BigDecimal(4),2,RoundingMode.HALF_UP).setScale(0,RoundingMode.HALF_UP);
+        BigDecimal proteins = SMRValue().multiply(new BigDecimal(0.3)).divide(new BigDecimal(4),2,RoundingMode.HALF_UP).setScale(0,RoundingMode.HALF_UP);
+        BigDecimal fats = SMRValue().multiply(new BigDecimal(0.3)).divide(new BigDecimal(9),2,RoundingMode.HALF_UP).setScale(0,RoundingMode.HALF_UP);
         System.out.println("Based on macro ratio of 40% carbs, 30% protein and 30% fats");
-        System.out.println("CARBS: " + carbs.intValue() + "g || " + "PROTEINS: " + proteins.intValue() + "g || " + "FATS: " + fats.intValue() + "g" );
+        System.out.println("CARBS: " + carbs.intValue() + "g || " + "PROTEINS: " + proteins.intValue() + "g || " + "FATS: " + fats.intValue()  + "g" );
     }
 
     public void calculateReduction() {
@@ -119,10 +119,10 @@ public class Calculators {
         System.out.println("You need " + (reduction-1000) + "kcal to lose 1 kg per week");
     }
 
-    public void printAll(UserData me)  {
+    public void printAll()  {
 
         System.out.println("*** PERSONAL DATA ***");
-        me.printUserData();
+        data.printUserData();
         System.out.println("*** RESULT BMI ***");
         calculateBMI();
         System.out.println("*** RESULTS IDEAL BODY WEIGHT ***");
