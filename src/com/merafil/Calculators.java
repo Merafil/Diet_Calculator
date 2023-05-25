@@ -92,6 +92,20 @@ public class Calculators {
         System.out.println("Euqation Mifflin : " + bdM.floatValue() + " kcal - based on activity of " + activity);
     }
 
+    public void calculateReduction(double activity) {
+        BigDecimal lowReduction,highReduction ;
+        if(data.getGender()=='m') {
+            lowReduction = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity - 250)).setScale(2, RoundingMode.HALF_UP);
+            highReduction = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity - 500)).setScale(2, RoundingMode.HALF_UP);
+        }
+        else    {
+            lowReduction = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) - 161) * activity - 500)).setScale(2, RoundingMode.HALF_UP);
+            highReduction = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * activity - 250)).setScale(2, RoundingMode.HALF_UP);
+        }
+        System.out.println("You need " + lowReduction.floatValue() + " kcal to lose 0.25 kg per week");
+        System.out.println("You need " + highReduction.floatValue() + " kcal to lose 0.5 kg per week");
+    }
+
     public void printAll(UserData me)  {
 
         System.out.println("*** PERSONAL DATA ***");
@@ -104,8 +118,10 @@ public class Calculators {
         System.out.println(calculateLBM());
         System.out.println("*** RESULTS BASAL METABOLIC RATE ***");
         calculateBMR();
-        System.out.println("*** RESULTS CALKOWITA PRZEMIANA MATERII ***");
+        System.out.println("*** RESULTS STANDARD METABOLIC RATE ***");
         calculateCPM(me.getActivity());
+        System.out.println("*** RESULTS FOR REDUCTION ***");
+        calculateReduction(me.getActivity());
 
     }
 
