@@ -2,6 +2,7 @@ package com.merafil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class Calculators {
 
@@ -29,15 +30,15 @@ public class Calculators {
     // IDEAL BODY WEIGHT
     public void calculateIBW()    {
 
-        System.out.println("Euqation Broca : " + (data.getHeight() - 100) + "kg");
+        System.out.println("Euqation Broca: " + (data.getHeight() - 100) + "kg");
 
         if(data.getGender()=='m') {
-            System.out.println("Euqation Lorentza : " + (data.getHeight() - 100 - ((data.getHeight() - 150) / 4)) + "kg");
-            System.out.println("Euqation Pottona : " + (data.getHeight() - 100 - ((data.getHeight() - 100) / 20)) + "kg");
+            System.out.println("Euqation Lorentza: " + (data.getHeight() - 100 - ((data.getHeight() - 150) / 4)) + "kg");
+            System.out.println("Euqation Pottona: " + (data.getHeight() - 100 - ((data.getHeight() - 100) / 20)) + "kg");
         }
         else    {
-            System.out.println("Euqation Lorentza : " + (data.getHeight() - 100 - ((data.getHeight() - 150) / 2)) + "kg");
-            System.out.println("Euqation Pottona : " + (data.getHeight() - 100 - ((data.getHeight() - 100) / 10)) + "kg");
+            System.out.println("Euqation Lorentza: " + (data.getHeight() - 100 - ((data.getHeight() - 150) / 2)) + "kg");
+            System.out.println("Euqation Pottona  " + (data.getHeight() - 100 - ((data.getHeight() - 100) / 10)) + "kg");
         }
 
     }
@@ -60,36 +61,24 @@ public class Calculators {
 
         if(data.getGender()=='m') {
             BigDecimal bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5))).setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Euqation Mifflin : " + bdM.floatValue() + "kcal");
+            System.out.println("Euqation Mifflin: " + bdM.floatValue() + "kcal");
 
             BigDecimal bdHB = new BigDecimal(Double.toString((66.5 + (13.75 * data.getWeight()) + (5.003 * data.getHeight()) - (6.775 * data.getAge())))).setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Euqation Harris-Benedict : " + bdHB.floatValue() + "kcal");
+            System.out.println("Euqation Harris-Benedict: " + bdHB.floatValue() + "kcal");
         }   else    {
             BigDecimal bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) - 161))).setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Euqation Mifflin : " + bdM.floatValue() + "kcal");
+            System.out.println("Euqation Mifflin: " + bdM.floatValue() + "kcal");
 
             BigDecimal bdHB = new BigDecimal(Double.toString((655.1 + (9.563 * data.getWeight()) + (1.85 * data.getHeight()) - (4.676 * data.getAge())))).setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Euqation Harris-Benedict : " + bdHB.floatValue() + "kcal");
+            System.out.println("Euqation Harris-Benedict: " + bdHB.floatValue() + "kcal");
         }
 
         BigDecimal bdC = new BigDecimal(Double.toString(500 + (22 * calculateLBM()))).setScale(2, RoundingMode.HALF_UP);
-        System.out.println("Euqation Cunningham : " + bdC.floatValue() + "kcal");
+        System.out.println("Euqation Cunningham: " + bdC.floatValue() + "kcal");
 
         BigDecimal bdKM = new BigDecimal(Double.toString(370 + (21.6 * calculateLBM()))).setScale(2, RoundingMode.HALF_UP);
-        System.out.println("Euqation Katch-McArdle : " + bdKM.floatValue() + "kcal");
+        System.out.println("Euqation Katch-McArdle: " + bdKM.floatValue() + "kcal");
 
-    }
-
-    // STANDARD METABOLIC RATE
-    public void calculateSMR()  {
-        BigDecimal bdM;
-        if(data.getGender()=='m') {
-            bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) + 5) * data.getActivity())).setScale(2, RoundingMode.HALF_UP);
-        }
-        else    {
-            bdM = new BigDecimal(Double.toString(((10 * data.getWeight()) + (6.25 * data.getHeight()) - (5 * data.getAge()) - 161) * data.getActivity())).setScale(2, RoundingMode.HALF_UP);
-        }
-        System.out.println("Euqation Mifflin : " + bdM.floatValue() + "kcal - based on activity of " + data.getActivity());
     }
 
     public BigDecimal SMRValue(){
@@ -103,20 +92,27 @@ public class Calculators {
         return bdM;
     }
 
+    // STANDARD METABOLIC RATE
+    public void calculateSMR()  {
+        float smr = SMRValue().floatValue();
+        System.out.println("Euqation Mifflin: " + smr + "kcal - based on activity of " + data.getActivity());
+    }
+
     // first new BigDecimal is percentage of total calories, second one is amount of kcal per gram
     public void calculateMacro(){
         BigDecimal carbs = SMRValue().multiply(new BigDecimal(0.4)).divide(new BigDecimal(4),2,RoundingMode.HALF_UP).setScale(0,RoundingMode.HALF_UP);
         BigDecimal proteins = SMRValue().multiply(new BigDecimal(0.3)).divide(new BigDecimal(4),2,RoundingMode.HALF_UP).setScale(0,RoundingMode.HALF_UP);
         BigDecimal fats = SMRValue().multiply(new BigDecimal(0.3)).divide(new BigDecimal(9),2,RoundingMode.HALF_UP).setScale(0,RoundingMode.HALF_UP);
         System.out.println("Based on macro ratio of 40% carbs, 30% protein and 30% fats");
-        System.out.println("CARBS: " + carbs.intValue() + "g || " + "PROTEINS: " + proteins.intValue() + "g || " + "FATS: " + fats.intValue()  + "g" );
+        System.out.println("CARBS: " + carbs + "g || " + "PROTEINS: " + proteins + "g || " + "FATS: " + fats  + "g" );
     }
 
     public void calculateReduction() {
         float reduction = SMRValue().floatValue();
-        System.out.println("You need " + (reduction-250) + "kcal to lose 0.25 kg per week");
-        System.out.println("You need " + (reduction-500) + "kcal to lose 0.5 kg per week");
-        System.out.println("You need " + (reduction-1000) + "kcal to lose 1 kg per week");
+        DecimalFormat df = new DecimalFormat("#.##");
+        System.out.println("You need " + df.format((reduction-250)) + "kcal to lose 0.25 kg per week");
+        System.out.println("You need " + df.format((reduction-500)) + "kcal to lose 0.5 kg per week");
+        System.out.println("You need " + df.format((reduction-1000)) + "kcal to lose 1 kg per week");
     }
 
     public void printAll()  {
